@@ -1,5 +1,6 @@
 package com.oocl.server;
 
+import com.oocl.Exception.TodoNotFoundException;
 import com.oocl.model.Todo;
 import com.oocl.repository.TodoRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,6 +57,16 @@ class TodoServiceTest {
         Todo todo = todoRepository.findById(1).orElse(null);
         /* then */
         assertEquals(givenTodo, todo);
+    }
+
+    @Test
+    void should_throw_TodoNotFoundException_when_update_given_not_exist_todo_id() {
+        //given
+        Todo givenTodo = new Todo(99,"学习");
+        when(todoRepository.findById(givenTodo.getId())).thenReturn(Optional.empty());
+        //when && then
+        assertThrows(TodoNotFoundException.class, () -> todoService.update(givenTodo));
+        verify(todoRepository, never()).save(any());
     }
 
 }
