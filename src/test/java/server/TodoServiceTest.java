@@ -38,10 +38,12 @@ class TodoServiceTest {
     void should_created_todo_when_create_todo() {
         //given
         Todo todo = new Todo(1,"学习");
+        when(todoRepository.save(todo)).thenReturn(todo);
         //when
-        todoService.save(todo);
+        Todo savedTodo = todoService.save(todo);
         /* then */
-        verify(todoRepository).save(todo);
+        assertEquals(1, savedTodo.getId());
+        assertEquals("学习", savedTodo.getText());
     }
 
 }
