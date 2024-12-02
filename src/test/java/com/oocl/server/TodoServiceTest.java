@@ -1,4 +1,4 @@
-package server;
+package com.oocl.server;
 
 import com.oocl.model.Todo;
 import com.oocl.repository.TodoRepository;
