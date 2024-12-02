@@ -1,5 +1,6 @@
 package com.oocl.server;
 
+import com.oocl.Exception.TodoNotFoundException;
 import com.oocl.model.Todo;
 import com.oocl.repository.TodoRepository;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,12 @@ public class TodoService {
         return todoRepository.save(todo);
     }
     public Todo update(Todo todo){
+        if(getById(todo.getId()) == null){
+            throw new TodoNotFoundException();
+        }
         return todoRepository.save(todo);
     }
+
     public void delete(Integer id){
         todoRepository.deleteById(id);
     }
