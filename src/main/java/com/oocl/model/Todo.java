@@ -2,6 +2,8 @@ package com.oocl.model;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "todo")
 public class Todo {
@@ -16,6 +18,10 @@ public class Todo {
         this.id = id;
         this.text = text;
         this.done = false;
+    }
+
+    public Todo() {
+
     }
 
     public Integer getId() {
@@ -40,5 +46,18 @@ public class Todo {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Todo todo = (Todo) o;
+        return Objects.equals(id, todo.id) && Objects.equals(text, todo.text) && Objects.equals(done, todo.done);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, text, done);
     }
 }

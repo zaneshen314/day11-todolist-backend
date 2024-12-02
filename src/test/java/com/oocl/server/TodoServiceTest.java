@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -23,7 +24,7 @@ class TodoServiceTest {
     TodoRepository todoRepository;
 
     @Test
-    void should_return_the_given_todos_when_findAll() {
+    void should_return_todos_when_findAll_given_todos() {
         //given
         when(todoRepository.findAll()).thenReturn(List.of(new Todo(1,"学习")));
         //when
@@ -35,7 +36,7 @@ class TodoServiceTest {
     }
 
     @Test
-    void should_created_todo_when_create_todo() {
+    void should_return_saved_todo_when_save_given_todo() {
         //given
         Todo todo = new Todo(1,"学习");
         when(todoRepository.save(todo)).thenReturn(todo);
@@ -44,6 +45,17 @@ class TodoServiceTest {
         /* then */
         assertEquals(1, savedTodo.getId());
         assertEquals("学习", savedTodo.getText());
+    }
+
+    @Test
+    void should_return_todo_when_getById_given_exist_todo_id() {
+        //given
+        Todo givenTodo = new Todo(1,"学习");
+        when(todoRepository.findById(givenTodo.getId())).thenReturn(Optional.of(givenTodo));
+        //when
+        Todo todo = todoRepository.findById(1).orElse(null);
+        /* then */
+        assertEquals(givenTodo, todo);
     }
 
 }
