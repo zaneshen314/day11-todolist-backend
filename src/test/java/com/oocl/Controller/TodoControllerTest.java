@@ -100,7 +100,7 @@ public class TodoControllerTest {
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value(updateText))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value(updateText))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.done").value(true));
     }
 
