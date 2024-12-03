@@ -105,7 +105,7 @@ public class TodoControllerTest {
     }
 
     @Test
-    void should_remove_todo_success() throws Exception {
+    void should_return_success_when_delete_todo_given_todo_id() throws Exception {
         // Given
         List<Todo> givenTodos = todoRepository.findAll();
         Todo givenTodo = givenTodos.get(0);
