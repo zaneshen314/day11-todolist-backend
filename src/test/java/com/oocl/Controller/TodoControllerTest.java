@@ -105,11 +105,11 @@ public class TodoControllerTest {
     }
 
     @Test
-    void should_remove_employee_success() throws Exception {
+    void should_remove_todo_success() throws Exception {
         // Given
-        List<Todo> givenEmployees = todoRepository.findAll();
-        Todo givenEmployee = givenEmployees.get(0);
-        int givenId = givenEmployee.getId();
+        List<Todo> givenTodos = todoRepository.findAll();
+        Todo givenTodo = givenTodos.get(0);
+        int givenId = givenTodo.getId();
 
         // When
         // Then
@@ -117,8 +117,8 @@ public class TodoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
         List<Todo> afterEmployees = todoRepository.findAll();
         assertThat(afterEmployees).hasSize(2);
-        AssertionsForClassTypes.assertThat(afterEmployees.get(0).getId()).isEqualTo(givenEmployees.get(1).getId());
-        AssertionsForClassTypes.assertThat(afterEmployees.get(1).getId()).isEqualTo(givenEmployees.get(2).getId());
+        AssertionsForClassTypes.assertThat(afterEmployees.get(0).getId()).isEqualTo(givenTodos.get(1).getId());
+        AssertionsForClassTypes.assertThat(afterEmployees.get(1).getId()).isEqualTo(givenTodos.get(2).getId());
     }
 
 }
